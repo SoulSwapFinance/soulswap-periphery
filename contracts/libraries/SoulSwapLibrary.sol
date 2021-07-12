@@ -2,8 +2,8 @@
 
 pragma solidity >=0.5.0;
 
-import 'soulswap-core/contracts/interfaces/ISoulSwapPair.sol';
-import 'soulswap-core/contracts/libraries/SafeMath.sol';
+import '../interfaces/ISoulSwapPair.sol';
+import './SafeMath.sol';
 
 library SoulSwapLibrary {
     using SafeMath for uint;

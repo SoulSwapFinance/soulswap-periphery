@@ -2,8 +2,8 @@
 
 pragma solidity >=0.5.0;
 
-import 'soulswap-core/contracts/interfaces/ISoulSwapPair.sol';
-import 'soulswap-lib/contracts/utils/FixedPoint.sol';
+import '../interfaces/ISoulSwapPair.sol';
+import '../libraries/FixedPoint.sol';
 
 // library with helper methods for oracles that are concerned with computing average prices
 library SoulSwapOracleLibrary {

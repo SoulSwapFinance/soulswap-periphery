@@ -1,6 +1,6 @@
 {
   "name": "soulswap-periphery",
-  "version": "0.3.0",
+  "version": "0.1.0",
   "description": "🕯 Peripheral Smart Contracts for interacting with SoulSwap",
   "engines": {
     "node": ">=10"
