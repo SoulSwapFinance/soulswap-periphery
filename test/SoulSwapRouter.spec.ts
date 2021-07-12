@@ -1,41 +1,46 @@
-import chai, { expect } from 'chai'
-import { solidity, MockProvider, createFixtureLoader, deployContract } from 'ethereum-waffle'
-import { Contract } from 'ethers'
-import { bigNumberify } from 'ethers/utils'
-import { MaxUint256 } from 'ethers/constants'
+import chai, { expect } from "chai";
+import {
+  solidity,
+  MockProvider,
+  createFixtureLoader,
+  deployContract
+} from "ethereum-waffle";
+import { Contract } from "ethers";
+import { bigNumberify } from "ethers/utils";
+import { MaxUint256 } from "ethers/constants";
 
-import { Fixture } from './shared/fixtures'
+import { Fixture } from "./shared/fixtures";
 
-chai.use(solidity)
+chai.use(solidity);
 
 const overrides = {
   gasLimit: 9999999
-}
+};
 
-describe('SoulSwapRouter', () => {
+describe("SoulSwapRouter", () => {
   const provider = new MockProvider({
-    hardfork: 'istanbul',
-    mnemonic: 'horn horn horn horn horn horn horn horn horn horn horn horn',
+    hardfork: "istanbul",
+    mnemonic: "horn horn horn horn horn horn horn horn horn horn horn horn",
     gasLimit: 9999999
-  })
-  const [wallet] = provider.getWallets()
-  const loadFixture = createFixtureLoader(provider, [wallet])
+  });
+  const [wallet] = provider.getWallets();
+  const loadFixture = createFixtureLoader(provider, [wallet]);
 
-  let token0: Contract
-  let token1: Contract
-  let router: Contract
+  let token0: Contract;
+  let token1: Contract;
+  let router: Contract;
   beforeEach(async function() {
-    const fixture = await loadFixture(Fixture)
-    token0 = fixture.token0
-    token1 = fixture.token1
-    router = fixture.router
-  })
+    const fixture = await loadFixture(Fixture);
+    token0 = fixture.token0;
+    token1 = fixture.token1;
+    router = fixture.router;
+  });
 
-
-  it('getAmountsOut', async () => {
-    await token0.approve(router.address, MaxUint256)
-    await token1.approve(router.address, MaxUint256)
-    console.log(      token0.address,
+  it("getAmountsOut", async () => {
+    await token0.approve(router.address, MaxUint256);
+    await token1.approve(router.address, MaxUint256);
+    console.log(
+      token0.address,
       token1.address,
       bigNumberify(10000),
       bigNumberify(10000),
@@ -43,7 +48,8 @@ describe('SoulSwapRouter', () => {
       0,
       wallet.address,
       MaxUint256,
-      overrides)
+      overrides
+    );
     await router.addLiquidity(
       token0.address,
       token1.address,
@@ -54,13 +60,15 @@ describe('SoulSwapRouter', () => {
       wallet.address,
       MaxUint256,
       overrides
-    )
+    );
 
-    await expect(router.getAmountsOut(bigNumberify(2), [token0.address])).to.be.revertedWith(
-      'SoulSwapLibrary: INVALID_PATH'
-    )
-    const path = [token0.address, token1.address]
-    expect(await router.getAmountsOut(bigNumberify(2), path)).to.deep.eq([bigNumberify(2), bigNumberify(1)])
-  })
-
-})
+    await expect(
+      router.getAmountsOut(bigNumberify(2), [token0.address])
+    ).to.be.revertedWith("SoulSwapLibrary: INVALID_PATH");
+    const path = [token0.address, token1.address];
+    expect(await router.getAmountsOut(bigNumberify(2), path)).to.deep.eq([
+      bigNumberify(2),
+      bigNumberify(1)
+    ]);
+  });
+});

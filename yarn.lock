@@ -1578,6 +1578,29 @@
   resolved "https://registry.yarnpkg.com/@solidity-parser/parser/-/parser-0.8.2.tgz#a6a5e93ac8dca6884a99a532f133beba59b87b69"
   integrity sha512-8LySx3qrNXPgB5JiULfG10O3V7QTxI/TLzSw5hFQhXWSkVxZBAv4rZQ0sYgLEbc8g3L2lmnujj1hKul38Eu5NQ==
 
+"@soulswap/swap-core@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@soulswap/swap-core/-/swap-core-0.0.1.tgz#09716aec0769f7d32b29e670eec22302789b4644"
+  integrity sha512-B3mF7tRNc4nmnizUGpcWV3ChGP+auKih8AfHx9kqa8o3EHI5G+kUzZStwCEuWL2FC7gTUDVPLUOVjK2M2cYApA==
+  dependencies:
+    "@ethereumjs/block" "^3.4.0"
+    "@ethersproject/bignumber" "^5.4.0"
+    babel-polyfill "^6.26.0"
+    babel-register "^6.26.0"
+    dotenv "^10.0.0"
+    ethereum-wallet "^0.0.6"
+    ethereumjs-vm "^4.2.0"
+    ethers "^5.4.1"
+    truffle "^5.4.0"
+    truffle-flattener "^1.5.0"
+    truffle-hdwallet-provider "^1.0.17"
+    web3 "^1.4.0"
+
+"@soulswap/swap-lib@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@soulswap/swap-lib/-/swap-lib-0.0.1.tgz#d688255925d551200a5240507950b07cb32378ec"
+  integrity sha512-Vjtydtfn0WG0LoMRRSBJWWnVnejELpPD2/l/7JQk3ENqKiztuDxIHFVBi47AiKw4+YkMNCJdh+dD1ry7dv6XdA==
+
 "@szmarczak/http-timer@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@szmarczak/http-timer/-/http-timer-1.1.2.tgz#b1665e2c461a2cd92f4c1bbf50d5454de0d4b421"
@@ -12066,29 +12089,6 @@ solc@^0.6.3, solc@^0.6.6:
     require-from-string "^2.0.0"
     semver "^5.5.0"
     tmp "0.0.33"
-
-soulswap-core@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/soulswap-core/-/soulswap-core-0.3.0.tgz#4910c1730fae40aa90670c041ec525fc681e6439"
-  integrity sha512-+aC2bTYXc+EG6IJYYNH3MunmeQsi7st1qUcuEC4u+fzhfltecex5Cr1OxDAuq9ju8dNq7mOUaHN3wAjAcN02eA==
-  dependencies:
-    "@ethereumjs/block" "^3.4.0"
-    "@ethersproject/bignumber" "^5.4.0"
-    babel-polyfill "^6.26.0"
-    babel-register "^6.26.0"
-    dotenv "^10.0.0"
-    ethereum-wallet "^0.0.6"
-    ethereumjs-vm "^4.2.0"
-    ethers "^5.4.1"
-    truffle "^5.4.0"
-    truffle-flattener "^1.5.0"
-    truffle-hdwallet-provider "^1.0.17"
-    web3 "^1.4.0"
-
-soulswap-lib@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/soulswap-lib/-/soulswap-lib-1.0.3.tgz#93b5214eb64bac899010335fabe5e0ce1baf1ae4"
-  integrity sha512-xxYlyYglPQlNdGuT6jtYU444k5cAuZd16pKasnF0mmZJ5yGynjThRnMqRdbDV68xzh01JQzRKKAFzKf2/8je5g==
 
 source-map-resolve@^0.5.0, source-map-resolve@^0.5.2:
   version "0.5.3"

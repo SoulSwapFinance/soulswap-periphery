@@ -1,7 +1,8 @@
 {
-  "name": "soulswap-periphery",
-  "version": "0.1.0",
-  "description": "🕯 Peripheral Smart Contracts for interacting with SoulSwap",
+  "name": "@soulswap/swap-periphery",
+  "version": "0.0.2",
+  "description": "🕯 Peripheral smart contracts for interacting with SoulSwap",
+  "authors": "Buns & Degatchi",
   "engines": {
     "node": ">=10"
   },
@@ -26,8 +27,8 @@
     "prepublishOnly": "yarn test"
   },
   "dependencies": {
-    "soulswap-core": "^0.3.0",
-    "soulswap-lib": "^1.0.3",
+    "@soulswap/swap-core": "^0.0.1",
+    "@soulswap/swap-lib": "^0.0.1",
     "truffle-flattener": "^1.5.0",
     "truffle-hdwallet-provider": "^1.0.17",
     "truffle-plugin-verify": "^0.4.0"
