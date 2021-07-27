@@ -2,11 +2,11 @@
 
 pragma solidity >=0.6.6;
 
-import 'soulswap-core/contracts/interfaces/IERC20.sol';
+import '@soulswap/swap-core/contracts/interfaces/IERC20.sol';
 import './interfaces/ISoulSwapRouter02.sol';
 import './interfaces/ISoulSwapFactory.sol';
 import './interfaces/IWETH.sol';
-import 'soulswap-lib/contracts/libraries/TransferHelper.sol';
+import '@soulswap/swap-lib/contracts/libraries/TransferHelper.sol';
 import './libraries/SoulSwapLibrary.sol';
 
 contract SoulSwapRouter is ISoulSwapRouter02 {

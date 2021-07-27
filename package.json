@@ -27,7 +27,8 @@
     "prepublishOnly": "yarn test"
   },
   "dependencies": {
-    "@soulswap/swap-core": "^0.0.1",
+    "@openzeppelin/contracts": "^4.2.0",
+    "@soulswap/swap-core": "^0.0.3",
     "@soulswap/swap-lib": "^0.0.1",
     "truffle-flattener": "^1.5.0",
     "truffle-hdwallet-provider": "^1.0.17",
