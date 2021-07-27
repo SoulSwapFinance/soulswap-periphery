@@ -1,0 +1,354 @@
+{
+  "contractName": "IMigrator",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        }
+      ],
+      "name": "migrate",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.6+commit.6c089d02\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"migrate\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/IMigrator.sol\":\"IMigrator\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@soulswap/swap-core/contracts/interfaces/IERC20.sol\":{\"keccak256\":\"0x0e7461bda1a5ed2bc9931f811c0a8d3801b37f52ae4f702406f5179949bbae98\",\"urls\":[\"bzz-raw://9379d37fa9fba0e3084af01c1afb466bf67635bfad972ffbf0cc5f36f013fa9b\",\"dweb:/ipfs/Qmcahd4nNTsVbXq2gHApyEU16zKsfVRVq7zQzg28GqdcMs\"]},\"project:/contracts/interfaces/IMigrator.sol\":{\"keccak256\":\"0x8936745f41803c4ac14778772c7883f879037d3c9aa02210be66d25c1437a6d9\",\"urls\":[\"bzz-raw://96834c531f61f6971fa54426bb7b6a73db0cec62e76a9cf1b6cfb51742dbd4cb\",\"dweb:/ipfs/QmWUT9PFX64CyErJ9Bgij5amRhpMNGmTQ1NKLvnmd99j8y\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\n\nimport '@soulswap/swap-core/contracts/interfaces/IERC20.sol';\n\npragma solidity >=0.6.6;\n\ninterface IMigrator {\n    // Perform LP token migration from legacy.\n    // Take the current LP token address and return the new LP token address.\n    // Migrator should have full access to the caller's LP token.\n    // Return the new LP token address.\n\n    function migrate(IERC20 token) external returns (IERC20);\n}\n",
+  "sourcePath": "/Users/Uni/Documents/GitHub/soulswap/soulswap-periphery/contracts/interfaces/IMigrator.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interfaces/IMigrator.sol",
+    "exportedSymbols": {
+      "IMigrator": [
+        6204
+      ]
+    },
+    "id": 6205,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "absolutePath": "@soulswap/swap-core/contracts/interfaces/IERC20.sol",
+        "file": "@soulswap/swap-core/contracts/interfaces/IERC20.sol",
+        "id": 6195,
+        "nodeType": "ImportDirective",
+        "scope": 6205,
+        "sourceUnit": 89,
+        "src": "33:61:8",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 6196,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.6",
+          ".6"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "96:24:8"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 6204,
+        "linearizedBaseContracts": [
+          6204
+        ],
+        "name": "IMigrator",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "functionSelector": "ce5494bb",
+            "id": 6203,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "migrate",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 6199,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6198,
+                  "mutability": "mutable",
+                  "name": "token",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 6203,
+                  "src": "397:12:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 6197,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 88,
+                    "src": "397:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "396:14:8"
+            },
+            "returnParameters": {
+              "id": 6202,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6201,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 6203,
+                  "src": "429:6:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 6200,
+                    "name": "IERC20",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 88,
+                    "src": "429:6:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "428:8:8"
+            },
+            "scope": 6204,
+            "src": "380:57:8",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 6205,
+        "src": "122:317:8"
+      }
+    ],
+    "src": "33:407:8"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/interfaces/IMigrator.sol",
+      "exportedSymbols": {
+        "IMigrator": [
+          6204
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "SourceUnit": 89,
+          "absolutePath": "@soulswap/swap-core/contracts/interfaces/IERC20.sol",
+          "file": "@soulswap/swap-core/contracts/interfaces/IERC20.sol",
+          "scope": 6205,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 6195,
+        "name": "ImportDirective",
+        "src": "33:61:8"
+      },
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.6",
+            ".6"
+          ]
+        },
+        "id": 6196,
+        "name": "PragmaDirective",
+        "src": "96:24:8"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "interface",
+          "documentation": null,
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            6204
+          ],
+          "name": "IMigrator",
+          "scope": 6205
+        },
+        "children": [
+          {
+            "attributes": {
+              "body": null,
+              "documentation": null,
+              "functionSelector": "ce5494bb",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "migrate",
+              "overrides": null,
+              "scope": 6204,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "token",
+                      "overrides": null,
+                      "scope": 6203,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "contract IERC20",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "IERC20",
+                          "referencedDeclaration": 88,
+                          "type": "contract IERC20"
+                        },
+                        "id": 6197,
+                        "name": "UserDefinedTypeName",
+                        "src": "397:6:8"
+                      }
+                    ],
+                    "id": 6198,
+                    "name": "VariableDeclaration",
+                    "src": "397:12:8"
+                  }
+                ],
+                "id": 6199,
+                "name": "ParameterList",
+                "src": "396:14:8"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "overrides": null,
+                      "scope": 6203,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "contract IERC20",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "IERC20",
+                          "referencedDeclaration": 88,
+                          "type": "contract IERC20"
+                        },
+                        "id": 6200,
+                        "name": "UserDefinedTypeName",
+                        "src": "429:6:8"
+                      }
+                    ],
+                    "id": 6201,
+                    "name": "VariableDeclaration",
+                    "src": "429:6:8"
+                  }
+                ],
+                "id": 6202,
+                "name": "ParameterList",
+                "src": "428:8:8"
+              }
+            ],
+            "id": 6203,
+            "name": "FunctionDefinition",
+            "src": "380:57:8"
+          }
+        ],
+        "id": 6204,
+        "name": "ContractDefinition",
+        "src": "122:317:8"
+      }
+    ],
+    "id": 6205,
+    "name": "SourceUnit",
+    "src": "33:407:8"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.6+commit.6c089d02.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.2",
+  "updatedAt": "2021-07-27T15:38:24.057Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "@soulswap/swap-periphery",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "🕯 Peripheral smart contracts for interacting with SoulSwap",
   "authors": "Buns & Degatchi",
   "engines": {
