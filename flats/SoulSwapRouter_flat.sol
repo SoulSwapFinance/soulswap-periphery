@@ -1,215 +1,351 @@
-// SPDX-License-Identifier: MIT
+/*--------------------------------------------------------------------------------------------------
+====================================================================================================
+*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~
+~~*~~~*~~~* SoulSwapRouter |*|*| SPDX-License-Identifier: MIT |*|*| 0xBuns + DeGatchi ~~~*~~~*~~~*~~
+*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~
+====================================================================================================
+----------------------------------------------------------------------------------------------------
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNy//yNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNs-..-yNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNs-.oo.-sNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmo..sNNs..sNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmo.-sNMMNs-.omMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMd+.:yNMMMMNy:`+dMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMh+`:yMMMMMMMMy:`+dMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMh/`/hMMMMMMMMMMh\`/hMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNy:./hMMMMMMMMMMMMd\.:hMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNy:.+dMMMMMMMMMMMMMMd+.:yNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNs-.omMMMMMMMMMMMMMMMMmo.-sNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMms-.omMMMMMMMMMMMMMMMMMMmo.-sNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmo.-sNMMMMMMMMMMMMMMMMMMMMNs-.omMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmo.-sNMMMMMMMMMMMMMMMMMMMMMMNs-.omMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMd+.:yNMMMMMMMMMMMMMMMMMMMMMMMMNy:.+dMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMd/.:hMMMMMNMMMMMMMMMNNMMMMMMMMMMMh:`/dMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMh/`/hMMNdho/:-..--::::-..--:+shmMMMh\`/hMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMy:`/dNho:-```-/shdmNNNmmdy+:.``.-/ydMd\`:hMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMNy:`/yy\.-/:.-odNMMMMMMMMMMMMNh/./y+../yy\`:yMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMNs-./:.-yhs:`+dMMMMMNdhyhhmNMMMMNs-.yhs:.-/\.-sNMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMsm.`:.:sdNd:`+dMMMdo.s.p.e.l.l.dMMMdo-.sNNh+-.:`msNMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMmo.`/.ymMMNo`:hMMMM-y.-sdmmds-.y-MMMMh`:hMMMdo:\`.omMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMd+../hMMMMMs.`yMMMMMm+/d(soul)b\+sMMMMMy`.sMMMMMh\-`+dmMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMd+..-+dMMMd/`+`uMMMMM.`/6\/.6.\/6\`.MOMMMy`-.dMMMd/`-.+dMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMh/./:`.ooyMMMy`-MOMMM`..`XOXOXOXO`..`MMMOM-`yMMMyoo.`:\.\hMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMh/./hNmy/.-ohNMy-.oNMMMNy/--:/:\:--\odMMMMh:`+mMNms\hNmy\.\hMhMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMNy:.+dMMMMmy+--/who-.omMMMMN.fantom.NMMMNmo.-who\--+yMMMMmd+.:yNMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMNy:.+dMMMMMMMNds/--/+:./yNMMMMMMMMMMMMMNdo-.//:--+ymMMMMMMMMb+.:yNMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMNs-.omMMMMMMMMMMMNdo/--.`.:shmNNNMMNNNdy+-``--:+ymNMMMMMMMMMMMmo.-sNMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMms-.omMMMMMMMMMMMMMMMNmyo/-...-:/++++/:-..-:+shmNMMMMMMMMMMMMMMMmo.-smMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMmo.-sNMMMMMMMMMMMMMMMMMMMMNmdhso++////++sydmNMMMMMMMMMMMMMMMMMMMMMNs-.omMMMMMMMMMMMMMM
+MMMMMMMMMMMMMm+.-yNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNy-.+mMMMMMMMMMMMMM
+MMMMMMMMMMMMd+`:yMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMy:`+dMMMMMMMMMMMM
+MMMMMMMMMMMh/`/hMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMh\`/hMMMMMMMMMMM
+MMMMMMMMMMh:`/dMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMd\`:hMMMMMMMMMM
+MMMMMMMMNy:.+dMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMd+.:yNMMMMMMMM
+MMMMMMNy-`:+seancessssssoooooooooooooooooooooooooooooooooooooooooooooooooooooooosscircle+:`-yNMMMMMM
+MMMMMMMNs::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::sNMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+====================================================================================================
+~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*~~~*
+====================================================================================================
+--------------------------------------------------------------------------------------------------*/
 
-pragma solidity >=0.5.0;
-
-// File: soulswap-core/contracts/interfaces/IERC20.sol
+pragma solidity ^0.6.6;
 
 interface IERC20 {
-
     // events
-    event Approval(address indexed owner, address indexed spender, uint value);
-    event Transfer(address indexed owner, address indexed spender, uint value);
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
+    event Transfer(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
 
     // token details
     function name() external view returns (string memory);
+
     function symbol() external view returns (string memory);
+
     function decimals() external view returns (uint8);
-    function totalSupply() external view returns (uint);
+
+    function totalSupply() external view returns (uint256);
 
     // address details
-    function balanceOf(address owner) external view returns (uint);
-    function allowance(address owner, address spender) external view returns (uint);
+    function balanceOf(address owner) external view returns (uint256);
+
+    function allowance(address owner, address spender)
+        external
+        view
+        returns (uint256);
+
     function getOwner() external view returns (address);
 
     // token actions
-    function approve(address spender, uint value) external returns (bool);
-    function transfer(address recipient, uint value) external returns (bool);
-    function transferFrom(address sender, address recipient, uint value) external returns (bool);
+    function approve(address spender, uint256 value) external returns (bool);
+
+    function transfer(address recipient, uint256 value) external returns (bool);
+
+    function transferFrom(
+        address sender,
+        address recipient,
+        uint256 value
+    ) external returns (bool);
 }
-
-// File: contracts/interfaces/ISoulSwapRouter01.sol
-
-pragma solidity >=0.6.2;
 
 interface ISoulSwapRouter01 {
     function factory() external view returns (address);
+
     function WETH() external view returns (address);
 
     function addLiquidity(
         address tokenA,
         address tokenB,
-        uint amountADesired,
-        uint amountBDesired,
-        uint amountAMin,
-        uint amountBMin,
+        uint256 amountADesired,
+        uint256 amountBDesired,
+        uint256 amountAMin,
+        uint256 amountBMin,
         address to,
-        uint deadline
-    ) external returns (uint amountA, uint amountB, uint liquidity);
+        uint256 deadline
+    )
+        external
+        returns (
+            uint256 amountA,
+            uint256 amountB,
+            uint256 liquidity
+        );
 
     function addLiquidityETH(
         address token,
-        uint amountTokenDesired,
-        uint amountTokenMin,
-        uint amountETHMin,
+        uint256 amountTokenDesired,
+        uint256 amountTokenMin,
+        uint256 amountETHMin,
         address to,
-        uint deadline
-    ) external payable returns (uint amountToken, uint amountETH, uint liquidity);
+        uint256 deadline
+    )
+        external
+        payable
+        returns (
+            uint256 amountToken,
+            uint256 amountETH,
+            uint256 liquidity
+        );
 
     function removeLiquidity(
         address tokenA,
         address tokenB,
-        uint liquidity,
-        uint amountAMin,
-        uint amountBMin,
+        uint256 liquidity,
+        uint256 amountAMin,
+        uint256 amountBMin,
         address to,
-        uint deadline
-    ) external returns (uint amountA, uint amountB);
+        uint256 deadline
+    ) external returns (uint256 amountA, uint256 amountB);
 
     function removeLiquidityETH(
         address token,
-        uint liquidity,
-        uint amountTokenMin,
-        uint amountETHMin,
+        uint256 liquidity,
+        uint256 amountTokenMin,
+        uint256 amountETHMin,
         address to,
-        uint deadline
-    ) external returns (uint amountToken, uint amountETH);
+        uint256 deadline
+    ) external returns (uint256 amountToken, uint256 amountETH);
 
     function removeLiquidityWithPermit(
         address tokenA,
         address tokenB,
-        uint liquidity,
-        uint amountAMin,
-        uint amountBMin,
+        uint256 liquidity,
+        uint256 amountAMin,
+        uint256 amountBMin,
         address to,
-        uint deadline,
-        bool approveMax, uint8 v, bytes32 r, bytes32 s
-    ) external returns (uint amountA, uint amountB);
+        uint256 deadline,
+        bool approveMax,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external returns (uint256 amountA, uint256 amountB);
 
     function removeLiquidityETHWithPermit(
         address token,
-        uint liquidity,
-        uint amountTokenMin,
-        uint amountETHMin,
+        uint256 liquidity,
+        uint256 amountTokenMin,
+        uint256 amountETHMin,
         address to,
-        uint deadline,
-        bool approveMax, uint8 v, bytes32 r, bytes32 s
-    ) external returns (uint amountToken, uint amountETH);
+        uint256 deadline,
+        bool approveMax,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external returns (uint256 amountToken, uint256 amountETH);
 
     function swapExactTokensForTokens(
-        uint amountIn,
-        uint amountOutMin,
+        uint256 amountIn,
+        uint256 amountOutMin,
         address[] calldata path,
         address to,
-        uint deadline
-    ) external returns (uint[] memory amounts);
+        uint256 deadline
+    ) external returns (uint256[] memory amounts);
 
     function swapTokensForExactTokens(
-        uint amountOut,
-        uint amountInMax,
+        uint256 amountOut,
+        uint256 amountInMax,
         address[] calldata path,
         address to,
-        uint deadline
-    ) external returns (uint[] memory amounts);
+        uint256 deadline
+    ) external returns (uint256[] memory amounts);
 
-    function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline)
-        external payable returns (uint[] memory amounts);
+    function swapExactETHForTokens(
+        uint256 amountOutMin,
+        address[] calldata path,
+        address to,
+        uint256 deadline
+    ) external payable returns (uint256[] memory amounts);
 
-    function swapTokensForExactETH(uint amountOut, uint amountInMax, address[] calldata path, address to, uint deadline)
-        external returns (uint[] memory amounts);
+    function swapTokensForExactETH(
+        uint256 amountOut,
+        uint256 amountInMax,
+        address[] calldata path,
+        address to,
+        uint256 deadline
+    ) external returns (uint256[] memory amounts);
 
-    function swapExactTokensForETH(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline)
-        external returns (uint[] memory amounts);
+    function swapExactTokensForETH(
+        uint256 amountIn,
+        uint256 amountOutMin,
+        address[] calldata path,
+        address to,
+        uint256 deadline
+    ) external returns (uint256[] memory amounts);
 
-    function swapETHForExactTokens(uint amountOut, address[] calldata path, address to, uint deadline)
-        external payable returns (uint[] memory amounts);
+    function swapETHForExactTokens(
+        uint256 amountOut,
+        address[] calldata path,
+        address to,
+        uint256 deadline
+    ) external payable returns (uint256[] memory amounts);
 
-    function quote(uint amountA, uint reserveA, uint reserveB) external pure returns (uint amountB);
-    function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) external pure returns (uint amountOut);
-    function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut) external pure returns (uint amountIn);
-    function getAmountsOut(uint amountIn, address[] calldata path) external view returns (uint[] memory amounts);
-    function getAmountsIn(uint amountOut, address[] calldata path) external view returns (uint[] memory amounts);
+    function quote(
+        uint256 amountA,
+        uint256 reserveA,
+        uint256 reserveB
+    ) external pure returns (uint256 amountB);
+
+    function getAmountOut(
+        uint256 amountIn,
+        uint256 reserveIn,
+        uint256 reserveOut
+    ) external pure returns (uint256 amountOut);
+
+    function getAmountIn(
+        uint256 amountOut,
+        uint256 reserveIn,
+        uint256 reserveOut
+    ) external pure returns (uint256 amountIn);
+
+    function getAmountsOut(uint256 amountIn, address[] calldata path)
+        external
+        view
+        returns (uint256[] memory amounts);
+
+    function getAmountsIn(uint256 amountOut, address[] calldata path)
+        external
+        view
+        returns (uint256[] memory amounts);
 }
-
-// File: contracts/interfaces/ISoulSwapRouter02.sol
-
-pragma solidity >=0.6.2;
 
 interface ISoulSwapRouter02 is ISoulSwapRouter01 {
     function removeLiquidityETHSupportingFeeOnTransferTokens(
         address token,
-        uint liquidity,
-        uint amountTokenMin,
-        uint amountETHMin,
+        uint256 liquidity,
+        uint256 amountTokenMin,
+        uint256 amountETHMin,
         address to,
-        uint deadline
-    ) external returns (uint amountETH);
+        uint256 deadline
+    ) external returns (uint256 amountETH);
+
     function removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(
         address token,
-        uint liquidity,
-        uint amountTokenMin,
-        uint amountETHMin,
+        uint256 liquidity,
+        uint256 amountTokenMin,
+        uint256 amountETHMin,
         address to,
-        uint deadline,
-        bool approveMax, uint8 v, bytes32 r, bytes32 s
-    ) external returns (uint amountETH);
+        uint256 deadline,
+        bool approveMax,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external returns (uint256 amountETH);
 
     function swapExactTokensForTokensSupportingFeeOnTransferTokens(
-        uint amountIn,
-        uint amountOutMin,
+        uint256 amountIn,
+        uint256 amountOutMin,
         address[] calldata path,
         address to,
-        uint deadline
+        uint256 deadline
     ) external;
+
     function swapExactETHForTokensSupportingFeeOnTransferTokens(
-        uint amountOutMin,
+        uint256 amountOutMin,
         address[] calldata path,
         address to,
-        uint deadline
+        uint256 deadline
     ) external payable;
+
     function swapExactTokensForETHSupportingFeeOnTransferTokens(
-        uint amountIn,
-        uint amountOutMin,
+        uint256 amountIn,
+        uint256 amountOutMin,
         address[] calldata path,
         address to,
-        uint deadline
+        uint256 deadline
     ) external;
 }
-
-// File: contracts/interfaces/ISoulSwapFactory.sol
 
 pragma solidity >=0.5.0;
 
 interface ISoulSwapFactory {
-    event PairCreated(address indexed token0, address indexed token1, address pair, uint);
+    event PairCreated(
+        address indexed token0,
+        address indexed token1,
+        address pair,
+        uint256
+    );
     event SetFeeTo(address indexed user, address indexed _feeTo);
     event SetMigrator(address indexed user, address indexed _migrator);
     event FeeToSetter(address indexed user, address indexed _feeToSetter);
 
     function feeTo() external view returns (address _feeTo);
+
     function feeToSetter() external view returns (address _feeToSetter);
+
     function migrator() external view returns (address _migrator);
 
-    function getPair(address tokenA, address tokenB) external view returns (address pair);
+    function getPair(address tokenA, address tokenB)
+        external
+        view
+        returns (address pair);
 
-    function createPair(address tokenA, address tokenB) external returns (address pair);
+    function createPair(address tokenA, address tokenB)
+        external
+        returns (address pair);
+
     function setMigrator(address) external;
+
     function setFeeTo(address) external;
+
     function setFeeToSetter(address) external;
 }
 
-// File: contracts/interfaces/IWETH.sol
-
-pragma solidity >=0.5.0;
-
 interface IWETH {
     function deposit() external payable;
-    function transfer(address to, uint value) external returns (bool);
-    function withdraw(uint) external;
+
+    function transfer(address to, uint256 value) external returns (bool);
+
+    function withdraw(uint256) external;
 }
-
-// File: soulswap-lib/contracts/libraries/TransferHelper.sol
-
-pragma solidity >=0.6.0;
 
 // helper methods for interacting with ERC20 tokens and sending ETH that do not consistently return true/false
 library TransferHelper {
@@ -219,10 +355,12 @@ library TransferHelper {
         uint256 value
     ) internal {
         // bytes4(keccak256(bytes('approve(address,uint256)')));
-        (bool success, bytes memory data) = token.call(abi.encodeWithSelector(0x095ea7b3, to, value));
+        (bool success, bytes memory data) = token.call(
+            abi.encodeWithSelector(0x095ea7b3, to, value)
+        );
         require(
             success && (data.length == 0 || abi.decode(data, (bool))),
-            'TransferHelper::safeApprove: approve failed'
+            "safeApprove failed"
         );
     }
 
@@ -232,10 +370,12 @@ library TransferHelper {
         uint256 value
     ) internal {
         // bytes4(keccak256(bytes('transfer(address,uint256)')));
-        (bool success, bytes memory data) = token.call(abi.encodeWithSelector(0xa9059cbb, to, value));
+        (bool success, bytes memory data) = token.call(
+            abi.encodeWithSelector(0xa9059cbb, to, value)
+        );
         require(
             success && (data.length == 0 || abi.decode(data, (bool))),
-            'TransferHelper::safeTransfer: transfer failed'
+            "safeTransfer failed"
         );
     }
 
@@ -246,133 +386,145 @@ library TransferHelper {
         uint256 value
     ) internal {
         // bytes4(keccak256(bytes('transferFrom(address,address,uint256)')));
-        (bool success, bytes memory data) = token.call(abi.encodeWithSelector(0x23b872dd, from, to, value));
+        (bool success, bytes memory data) = token.call(
+            abi.encodeWithSelector(0x23b872dd, from, to, value)
+        );
         require(
             success && (data.length == 0 || abi.decode(data, (bool))),
-            'TransferHelper::transferFrom: transferFrom failed'
+            "transferFrom failed"
         );
     }
 
     function safeTransferETH(address to, uint256 value) internal {
         (bool success, ) = to.call{value: value}(new bytes(0));
-        require(success, 'TransferHelper::safeTransferETH: ETH transfer failed');
+        require(
+            success,
+            "TransferHelper::safeTransferETH: ETH transfer failed"
+        );
     }
 }
 
-// File: soulswap-core/contracts/interfaces/ISoulSwapPair.sol
-
-pragma solidity >=0.5.0;
-
 interface ISoulSwapPair {
-    event Approval(address indexed owner, address indexed spender, uint value);
-    event Transfer(address indexed from, address indexed to, uint value);
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
+    event Transfer(address indexed from, address indexed to, uint256 value);
 
     function name() external pure returns (string memory);
-    function symbol() external pure returns (string memory);
-    function decimals() external pure returns (uint8);
-    function totalSupply() external view returns (uint);
-    function balanceOf(address owner) external view returns (uint);
-    function allowance(address owner, address spender) external view returns (uint);
 
-    function approve(address spender, uint value) external returns (bool);
-    function transfer(address to, uint value) external returns (bool);
-    function transferFrom(address from, address to, uint value) external returns (bool);
+    function symbol() external pure returns (string memory);
+
+    function decimals() external pure returns (uint8);
+
+    function totalSupply() external view returns (uint256);
+
+    function balanceOf(address owner) external view returns (uint256);
+
+    function allowance(address owner, address spender)
+        external
+        view
+        returns (uint256);
+
+    function approve(address spender, uint256 value) external returns (bool);
+
+    function transfer(address to, uint256 value) external returns (bool);
+
+    function transferFrom(
+        address from,
+        address to,
+        uint256 value
+    ) external returns (bool);
 
     function DOMAIN_SEPARATOR() external view returns (bytes32);
+
     function PERMIT_TYPEHASH() external pure returns (bytes32);
-    function nonces(address owner) external view returns (uint);
 
-    function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external;
+    function nonces(address owner) external view returns (uint256);
 
-    event Mint(address indexed sender, uint amount0, uint amount1);
-    event Burn(address indexed sender, uint amount0, uint amount1, address indexed to);
-    event Swap(
+    function permit(
+        address owner,
+        address spender,
+        uint256 value,
+        uint256 deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external;
+
+    event Sync(uint112 reserve0, uint112 reserve1);
+    event Mint(address indexed sender, uint256 amount0, uint256 amount1);
+    event Burn(
         address indexed sender,
-        uint amount0In,
-        uint amount1In,
-        uint amount0Out,
-        uint amount1Out,
+        uint256 amount0,
+        uint256 amount1,
         address indexed to
     );
-    event Sync(uint112 reserve0, uint112 reserve1);
+    event Swap(
+        address indexed sender,
+        uint256 amount0In,
+        uint256 amount1In,
+        uint256 amount0Out,
+        uint256 amount1Out,
+        address indexed to
+    );
 
-    function MINIMUM_LIQUIDITY() external pure returns (uint);
+    function MINIMUM_LIQUIDITY() external pure returns (uint256);
+
     function factory() external view returns (address);
-    function token0() external view returns (address);
-    function token1() external view returns (address);
-    function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast);
-    function price0CumulativeLast() external view returns (uint);
-    function price1CumulativeLast() external view returns (uint);
-    function kLast() external view returns (uint);
 
-    function mint(address to) external returns (uint liquidity);
-    function burn(address to) external returns (uint amount0, uint amount1);
-    function swap(uint amount0Out, uint amount1Out, address to, bytes calldata data) external;
+    function token0() external view returns (address);
+
+    function token1() external view returns (address);
+
+    function getReserves()
+        external
+        view
+        returns (
+            uint112 reserve0,
+            uint112 reserve1,
+            uint32 blockTimestampLast
+        );
+
+    function price0CumulativeLast() external view returns (uint256);
+
+    function price1CumulativeLast() external view returns (uint256);
+
+    function kLast() external view returns (uint256);
+
+    function mint(address to) external returns (uint256 liquidity);
+
+    function burn(address to)
+        external
+        returns (uint256 amount0, uint256 amount1);
+
+    function swap(
+        uint256 amount0Out,
+        uint256 amount1Out,
+        address to,
+        bytes calldata data
+    ) external;
+
     function skim(address to) external;
+
     function sync() external;
 
     function initialize(address, address) external;
 }
 
-// File: soulswap-core/contracts/libraries/SafeMath.sol
-
-pragma solidity >=0.5.0 <0.8.0;
-
-/**
- * @dev Wrappers over Solidity's arithmetic operations with added overflow
- * checks.
- *
- * Arithmetic operations in Solidity wrap on overflow. This can easily result
- * in bugs, because programmers usually assume that an overflow raises an
- * error, which is the standard behavior in high level programming languages.
- * `SafeMath` restores this intuition by reverting the transaction when an
- * operation overflows.
- *
- * Using this library instead of the unchecked operations eliminates an entire
- * class of bugs, so it's recommended to use it always.
- */
 library SafeMath {
-    /**
-     * @dev Returns the addition of two unsigned integers, reverting on
-     * overflow.
-     *
-     * Counterpart to Solidity's `+` operator.
-     *
-     * Requirements:
-     *
-     * - Addition cannot overflow.
-     */
     function add(uint256 a, uint256 b) internal pure returns (uint256) {
         uint256 c = a + b;
-        require(c >= a, 'SafeMath: addition overflow');
+        require(c >= a, "SafeMath: addition overflow");
 
         return c;
     }
 
-    /**
-     * @dev Returns the subtraction of two unsigned integers, reverting on
-     * overflow (when the result is negative).
-     *
-     * Counterpart to Solidity's `-` operator.
-     *
-     * Requirements:
-     *
-     * - Subtraction cannot overflow.
-     */
     function sub(uint256 a, uint256 b) internal pure returns (uint256) {
-        return sub(a, b, 'SafeMath: subtraction overflow');
+        return sub(a, b, "SafeMath: subtraction overflow");
     }
 
-    /**
-     * @dev Returns the subtraction of two unsigned integers, reverting with custom message on
-     * overflow (when the result is negative).
-     *
-     * Counterpart to Solidity's `-` operator.
-     *
-     * Requirements:
-     *
-     * - Subtraction cannot overflow.
-     */
     function sub(
         uint256 a,
         uint256 b,
@@ -380,62 +532,22 @@ library SafeMath {
     ) internal pure returns (uint256) {
         require(b <= a, errorMessage);
         uint256 c = a - b;
-
         return c;
     }
 
-    /**
-     * @dev Returns the multiplication of two unsigned integers, reverting on
-     * overflow.
-     *
-     * Counterpart to Solidity's `*` operator.
-     *
-     * Requirements:
-     *
-     * - Multiplication cannot overflow.
-     */
     function mul(uint256 a, uint256 b) internal pure returns (uint256) {
-        // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
-        // benefit is lost if 'b' is also tested.
-        // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522
         if (a == 0) {
             return 0;
         }
-
         uint256 c = a * b;
-        require(c / a == b, 'SafeMath: multiplication overflow');
-
+        require(c / a == b, "SafeMath: multiplication overflow");
         return c;
     }
 
-    /**
-     * @dev Returns the integer division of two unsigned integers. Reverts on
-     * division by zero. The result is rounded towards zero.
-     *
-     * Counterpart to Solidity's `/` operator. Note: this function uses a
-     * `revert` opcode (which leaves remaining gas untouched) while Solidity
-     * uses an invalid opcode to revert (consuming all remaining gas).
-     *
-     * Requirements:
-     *
-     * - The divisor cannot be zero.
-     */
     function div(uint256 a, uint256 b) internal pure returns (uint256) {
-        return div(a, b, 'SafeMath: division by zero');
+        return div(a, b, "SafeMath: division by zero");
     }
 
-    /**
-     * @dev Returns the integer division of two unsigned integers. Reverts with custom message on
-     * division by zero. The result is rounded towards zero.
-     *
-     * Counterpart to Solidity's `/` operator. Note: this function uses a
-     * `revert` opcode (which leaves remaining gas untouched) while Solidity
-     * uses an invalid opcode to revert (consuming all remaining gas).
-     *
-     * Requirements:
-     *
-     * - The divisor cannot be zero.
-     */
     function div(
         uint256 a,
         uint256 b,
@@ -443,39 +555,13 @@ library SafeMath {
     ) internal pure returns (uint256) {
         require(b > 0, errorMessage);
         uint256 c = a / b;
-        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
-
         return c;
     }
 
-    /**
-     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
-     * Reverts when dividing by zero.
-     *
-     * Counterpart to Solidity's `%` operator. This function uses a `revert`
-     * opcode (which leaves remaining gas untouched) while Solidity uses an
-     * invalid opcode to revert (consuming all remaining gas).
-     *
-     * Requirements:
-     *
-     * - The divisor cannot be zero.
-     */
     function mod(uint256 a, uint256 b) internal pure returns (uint256) {
-        return mod(a, b, 'SafeMath: modulo by zero');
+        return mod(a, b, "SafeMath: modulo by zero");
     }
 
-    /**
-     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
-     * Reverts with custom message when dividing by zero.
-     *
-     * Counterpart to Solidity's `%` operator. This function uses a `revert`
-     * opcode (which leaves remaining gas untouched) while Solidity uses an
-     * invalid opcode to revert (consuming all remaining gas).
-     *
-     * Requirements:
-     *
-     * - The divisor cannot be zero.
-     */
     function mod(
         uint256 a,
         uint256 b,
@@ -504,92 +590,146 @@ library SafeMath {
     }
 }
 
-// File: contracts/libraries/SoulSwapLibrary.sol
-
-pragma solidity >=0.5.0;
-
 library SoulSwapLibrary {
-    using SafeMath for uint;
+    using SafeMath for uint256;
 
     // returns sorted token addresses, used to handle return values from pairs sorted in this order
-    function sortTokens(address tokenA, address tokenB) internal pure returns (address token0, address token1) {
-        require(tokenA != tokenB, 'SoulSwapLibrary: IDENTICAL_ADDRESSES');
-        (token0, token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
-        require(token0 != address(0), 'SoulSwapLibrary: ZERO_ADDRESS');
+    function sortTokens(address tokenA, address tokenB)
+        internal
+        pure
+        returns (address token0, address token1)
+    {
+        require(tokenA != tokenB, "SoulSwapLibrary: IDENTICAL_ADDRESSES");
+        (token0, token1) = tokenA < tokenB
+            ? (tokenA, tokenB)
+            : (tokenB, tokenA);
+        require(token0 != address(0), "SoulSwapLibrary: ZERO_ADDRESS");
     }
 
     // calculates the CREATE2 address for a pair without making any external calls
-    function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
+    function pairFor(
+        address factory,
+        address tokenA,
+        address tokenB
+    ) internal pure returns (address pair) {
         (address token0, address token1) = sortTokens(tokenA, tokenB);
-        pair = address(uint(keccak256(abi.encodePacked(
-                hex'ff',
-                factory,
-                keccak256(abi.encodePacked(token0, token1)),
-                hex'f3dcc3c6c6e34d3981dd429ac942301b9ebdd05de1be17f646b55476c44dc951' // init code hash
-            ))));
+        pair = address(
+            uint256(
+                keccak256(
+                    abi.encodePacked(
+                        hex"ff",
+                        factory,
+                        keccak256(abi.encodePacked(token0, token1)),
+                        hex"77f32394b308da351f89b86e6190120d25005e6e9f197eb8d189b5ef85461823" // init code hash
+                    )
+                )
+            )
+        );
     }
 
     // fetches and sorts the reserves for a pair
-    function getReserves(address factory, address tokenA, address tokenB) internal view returns (uint reserveA, uint reserveB) {
-        (address token0,) = sortTokens(tokenA, tokenB);
+    function getReserves(
+        address factory,
+        address tokenA,
+        address tokenB
+    ) internal view returns (uint256 reserveA, uint256 reserveB) {
+        (address token0, ) = sortTokens(tokenA, tokenB);
         pairFor(factory, tokenA, tokenB);
-        (uint reserve0, uint reserve1,) = ISoulSwapPair(pairFor(factory, tokenA, tokenB)).getReserves();
-        (reserveA, reserveB) = tokenA == token0 ? (reserve0, reserve1) : (reserve1, reserve0);
+        (uint256 reserve0, uint256 reserve1, ) = ISoulSwapPair(
+            pairFor(factory, tokenA, tokenB)
+        ).getReserves();
+        (reserveA, reserveB) = tokenA == token0
+            ? (reserve0, reserve1)
+            : (reserve1, reserve0);
     }
 
     // given some amount of an asset and pair reserves, returns an equivalent amount of the other asset
-    function quote(uint amountA, uint reserveA, uint reserveB) internal pure returns (uint amountB) {
-        require(amountA > 0, 'SoulSwapLibrary: INSUFFICIENT_AMOUNT');
-        require(reserveA > 0 && reserveB > 0, 'SoulSwapLibrary: INSUFFICIENT_LIQUIDITY');
+    function quote(
+        uint256 amountA,
+        uint256 reserveA,
+        uint256 reserveB
+    ) internal pure returns (uint256 amountB) {
+        require(amountA > 0, "SoulSwapLibrary: INSUFFICIENT_AMOUNT");
+        require(
+            reserveA > 0 && reserveB > 0,
+            "SoulSwapLibrary: INSUFFICIENT_LIQUIDITY"
+        );
         amountB = amountA.mul(reserveB) / reserveA;
     }
 
     // given an input amount of an asset and pair reserves, returns the maximum output amount of the other asset
-    function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) internal pure returns (uint amountOut) {
-        require(amountIn > 0, 'SoulSwapLibrary: INSUFFICIENT_INPUT_AMOUNT');
-        require(reserveIn > 0 && reserveOut > 0, 'SoulSwapLibrary: INSUFFICIENT_LIQUIDITY');
-        uint amountInWithFee = amountIn.mul(998);
-        uint numerator = amountInWithFee.mul(reserveOut);
-        uint denominator = reserveIn.mul(1000).add(amountInWithFee);
+    function getAmountOut(
+        uint256 amountIn,
+        uint256 reserveIn,
+        uint256 reserveOut
+    ) internal pure returns (uint256 amountOut) {
+        require(amountIn > 0, "SoulSwapLibrary: INSUFFICIENT_INPUT_AMOUNT");
+        require(
+            reserveIn > 0 && reserveOut > 0,
+            "SoulSwapLibrary: INSUFFICIENT_LIQUIDITY"
+        );
+        uint256 amountInWithFee = amountIn.mul(998);
+        uint256 numerator = amountInWithFee.mul(reserveOut);
+        uint256 denominator = reserveIn.mul(1000).add(amountInWithFee);
         amountOut = numerator / denominator;
     }
 
     // given an output amount of an asset and pair reserves, returns a required input amount of the other asset
-    function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut) internal pure returns (uint amountIn) {
-        require(amountOut > 0, 'SoulSwapLibrary: INSUFFICIENT_OUTPUT_AMOUNT');
-        require(reserveIn > 0 && reserveOut > 0, 'SoulSwapLibrary: INSUFFICIENT_LIQUIDITY');
-        uint numerator = reserveIn.mul(amountOut).mul(1000);
-        uint denominator = reserveOut.sub(amountOut).mul(998);
+    function getAmountIn(
+        uint256 amountOut,
+        uint256 reserveIn,
+        uint256 reserveOut
+    ) internal pure returns (uint256 amountIn) {
+        require(amountOut > 0, "SoulSwapLibrary: INSUFFICIENT_OUTPUT_AMOUNT");
+        require(
+            reserveIn > 0 && reserveOut > 0,
+            "SoulSwapLibrary: INSUFFICIENT_LIQUIDITY"
+        );
+        uint256 numerator = reserveIn.mul(amountOut).mul(1000);
+        uint256 denominator = reserveOut.sub(amountOut).mul(998);
         amountIn = (numerator / denominator).add(1);
     }
 
     // performs chained getAmountOut calculations on any number of pairs
-    function getAmountsOut(address factory, uint amountIn, address[] memory path) internal view returns (uint[] memory amounts) {
-        require(path.length >= 2, 'SoulSwapLibrary: INVALID_PATH');
-        amounts = new uint[](path.length);
+    function getAmountsOut(
+        address factory,
+        uint256 amountIn,
+        address[] memory path
+    ) internal view returns (uint256[] memory amounts) {
+        require(path.length >= 2, "SoulSwapLibrary: INVALID_PATH");
+        amounts = new uint256[](path.length);
         amounts[0] = amountIn;
-        for (uint i; i < path.length - 1; i++) {
-            (uint reserveIn, uint reserveOut) = getReserves(factory, path[i], path[i + 1]);
+        for (uint256 i; i < path.length - 1; i++) {
+            (uint256 reserveIn, uint256 reserveOut) = getReserves(
+                factory,
+                path[i],
+                path[i + 1]
+            );
             amounts[i + 1] = getAmountOut(amounts[i], reserveIn, reserveOut);
         }
     }
 
     // performs chained getAmountIn calculations on any number of pairs
-    function getAmountsIn(address factory, uint amountOut, address[] memory path) internal view returns (uint[] memory amounts) {
-        require(
-            path.length >= 2, 'SoulSwapLibrary: INVALID_PATH');
-        amounts = new uint[](path.length);
+    function getAmountsIn(
+        address factory,
+        uint256 amountOut,
+        address[] memory path
+    ) internal view returns (uint256[] memory amounts) {
+        require(path.length >= 2, "SoulSwapLibrary: INVALID_PATH");
+
+        amounts = new uint256[](path.length);
         amounts[amounts.length - 1] = amountOut;
-        for (uint i = path.length - 1; i > 0; i--) {
-            (uint reserveIn, uint reserveOut) = getReserves(factory, path[i - 1], path[i]);
+
+        for (uint256 i = path.length - 1; i > 0; i--) {
+            (uint256 reserveIn, uint256 reserveOut) = getReserves(
+                factory,
+                path[i - 1],
+                path[i]
+            );
             amounts[i - 1] = getAmountIn(amounts[i], reserveIn, reserveOut);
         }
     }
 }
-
-// File: contracts/SoulSwapRouter.sol
-
-pragma solidity >=0.6.6;
 
 contract SoulSwapRouter is ISoulSwapRouter02 {
     using SafeMath for uint256;
@@ -602,9 +742,9 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         _;
     }
 
-    constructor(address _factory, address _WETH) public {
-        factory = _factory;
-        WETH = _WETH;
+    constructor() public {
+        factory = 0x91c0d9987E1Ea80E94ca702b5B4906E6bbAb308C; // SoulSwapFactory
+        WETH = 0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83; // WFTM
     }
 
     receive() external payable {
@@ -624,13 +764,21 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         if (ISoulSwapFactory(factory).getPair(tokenA, tokenB) == address(0)) {
             ISoulSwapFactory(factory).createPair(tokenA, tokenB);
         }
-        (uint256 reserveA, uint256 reserveB) =
-            SoulSwapLibrary.getReserves(factory, tokenA, tokenB);
+
+        (uint256 reserveA, uint256 reserveB) = SoulSwapLibrary.getReserves(
+            factory,
+            tokenA,
+            tokenB
+        );
+
         if (reserveA == 0 && reserveB == 0) {
             (amountA, amountB) = (amountADesired, amountBDesired);
         } else {
-            uint256 amountBOptimal =
-                SoulSwapLibrary.quote(amountADesired, reserveA, reserveB);
+            uint256 amountBOptimal = SoulSwapLibrary.quote(
+                amountADesired,
+                reserveA,
+                reserveB
+            );
             if (amountBOptimal <= amountBDesired) {
                 require(
                     amountBOptimal >= amountBMin,
@@ -638,8 +786,11 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
                 );
                 (amountA, amountB) = (amountADesired, amountBOptimal);
             } else {
-                uint256 amountAOptimal =
-                    SoulSwapLibrary.quote(amountBDesired, reserveB, reserveA);
+                uint256 amountAOptimal = SoulSwapLibrary.quote(
+                    amountBDesired,
+                    reserveB,
+                    reserveA
+                );
                 assert(amountAOptimal <= amountADesired);
                 require(
                     amountAOptimal >= amountAMin,
@@ -678,6 +829,7 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
             amountAMin,
             amountBMin
         );
+
         address pair = SoulSwapLibrary.pairFor(factory, tokenA, tokenB);
         TransferHelper.safeTransferFrom(tokenA, msg.sender, pair, amountA);
         TransferHelper.safeTransferFrom(tokenB, msg.sender, pair, amountB);
@@ -711,11 +863,14 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
             amountTokenMin,
             amountETHMin
         );
+
         address pair = SoulSwapLibrary.pairFor(factory, token, WETH);
         TransferHelper.safeTransferFrom(token, msg.sender, pair, amountToken);
         IWETH(WETH).deposit{value: amountETH}();
+
         assert(IWETH(WETH).transfer(pair, amountETH));
         liquidity = ISoulSwapPair(pair).mint(to);
+
         // refund dust eth, if any
         if (msg.value > amountETH)
             TransferHelper.safeTransferETH(msg.sender, msg.value - amountETH);
@@ -730,14 +885,22 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         uint256 amountBMin,
         address to,
         uint256 deadline
-    ) public virtual override ensure(deadline) returns (uint256 amountA, uint256 amountB) {
+    )
+        public
+        virtual
+        override
+        ensure(deadline)
+        returns (uint256 amountA, uint256 amountB)
+    {
         address pair = SoulSwapLibrary.pairFor(factory, tokenA, tokenB);
         ISoulSwapPair(pair).transferFrom(msg.sender, pair, liquidity); // send liquidity to pair
+
         (uint256 amount0, uint256 amount1) = ISoulSwapPair(pair).burn(to);
         (address token0, ) = SoulSwapLibrary.sortTokens(tokenA, tokenB);
         (amountA, amountB) = tokenA == token0
             ? (amount0, amount1)
             : (amount1, amount0);
+
         require(amountA >= amountAMin, "SoulSwapRouter: INSUFFICIENT_A_AMOUNT");
         require(amountB >= amountBMin, "SoulSwapRouter: INSUFFICIENT_B_AMOUNT");
     }
@@ -749,7 +912,13 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         uint256 amountETHMin,
         address to,
         uint256 deadline
-    ) public virtual override ensure(deadline) returns (uint256 amountToken, uint256 amountETH) {
+    )
+        public
+        virtual
+        override
+        ensure(deadline)
+        returns (uint256 amountToken, uint256 amountETH)
+    {
         (amountToken, amountETH) = removeLiquidity(
             token,
             WETH,
@@ -759,6 +928,7 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
             address(this),
             deadline
         );
+
         TransferHelper.safeTransfer(token, to, amountToken);
         IWETH(WETH).withdraw(amountETH);
         TransferHelper.safeTransferETH(to, amountETH);
@@ -811,7 +981,11 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         bytes32 r,
         bytes32 s
     )
-        external virtual override returns (uint256 amountToken, uint256 amountETH) {
+        external
+        virtual
+        override
+        returns (uint256 amountToken, uint256 amountETH)
+    {
         address pair = SoulSwapLibrary.pairFor(factory, token, WETH);
         uint256 value = approveMax ? uint256(-1) : liquidity;
         ISoulSwapPair(pair).permit(
@@ -851,11 +1025,13 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
             address(this),
             deadline
         );
+
         TransferHelper.safeTransfer(
             token,
             to,
             IERC20(token).balanceOf(address(this))
         );
+
         IWETH(WETH).withdraw(amountETH);
         TransferHelper.safeTransferETH(to, amountETH);
     }
@@ -904,20 +1080,18 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
             (address input, address output) = (path[i], path[i + 1]);
             (address token0, ) = SoulSwapLibrary.sortTokens(input, output);
             uint256 amountOut = amounts[i + 1];
-            (uint256 amount0Out, uint256 amount1Out) =
-                input == token0
-                    ? (uint256(0), amountOut)
-                    : (amountOut, uint256(0));
-            address to =
-                i < path.length - 2
-                    ? SoulSwapLibrary.pairFor(factory, output, path[i + 2])
-                    : _to;
+            (uint256 amount0Out, uint256 amount1Out) = input == token0
+                ? (uint256(0), amountOut)
+                : (amountOut, uint256(0));
+            address to = i < path.length - 2
+                ? SoulSwapLibrary.pairFor(factory, output, path[i + 2])
+                : _to;
             ISoulSwapPair(SoulSwapLibrary.pairFor(factory, input, output)).swap(
-                amount0Out,
-                amount1Out,
-                to,
-                new bytes(0)
-            );
+                    amount0Out,
+                    amount1Out,
+                    to,
+                    new bytes(0)
+                );
         }
     }
 
@@ -927,16 +1101,26 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external virtual override ensure(deadline) returns (uint256[] memory amounts) {
+    )
+        external
+        virtual
+        override
+        ensure(deadline)
+        returns (uint256[] memory amounts)
+    {
         amounts = SoulSwapLibrary.getAmountsOut(factory, amountIn, path);
-        require( amounts[amounts.length - 1] >= amountOutMin,
-            "SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT");
+        require(
+            amounts[amounts.length - 1] >= amountOutMin,
+            "SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT"
+        );
+
         TransferHelper.safeTransferFrom(
             path[0],
             msg.sender,
             SoulSwapLibrary.pairFor(factory, path[0], path[1]),
             amounts[0]
         );
+
         _swap(amounts, path, to);
     }
 
@@ -946,15 +1130,26 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external virtual override ensure(deadline) returns (uint256[] memory amounts) {
+    )
+        external
+        virtual
+        override
+        ensure(deadline)
+        returns (uint256[] memory amounts)
+    {
         amounts = SoulSwapLibrary.getAmountsIn(factory, amountOut, path);
-        require(amounts[0] <= amountInMax, "SoulSwapRouter: EXCESSIVE_INPUT_AMOUNT");
+        require(
+            amounts[0] <= amountInMax,
+            "SoulSwapRouter: EXCESSIVE_INPUT_AMOUNT"
+        );
+
         TransferHelper.safeTransferFrom(
             path[0],
             msg.sender,
             SoulSwapLibrary.pairFor(factory, path[0], path[1]),
             amounts[0]
         );
+
         _swap(amounts, path, to);
     }
 
@@ -963,12 +1158,29 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external payable virtual override ensure(deadline) returns (uint256[] memory amounts) {
+    )
+        external
+        payable
+        virtual
+        override
+        ensure(deadline)
+        returns (uint256[] memory amounts)
+    {
         require(path[0] == WETH, "SoulSwapRouter: INVALID_PATH");
         amounts = SoulSwapLibrary.getAmountsOut(factory, msg.value, path);
-        require(amounts[amounts.length - 1] >= amountOutMin, "SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT");
+
+        require(
+            amounts[amounts.length - 1] >= amountOutMin,
+            "SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT"
+        );
         IWETH(WETH).deposit{value: amounts[0]}();
-        assert(IWETH(WETH).transfer(SoulSwapLibrary.pairFor(factory, path[0], path[1]), amounts[0]));
+
+        assert(
+            IWETH(WETH).transfer(
+                SoulSwapLibrary.pairFor(factory, path[0], path[1]),
+                amounts[0]
+            )
+        );
         _swap(amounts, path, to);
     }
 
@@ -978,18 +1190,32 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external virtual override ensure(deadline) returns (uint256[] memory amounts) {
+    )
+        external
+        virtual
+        override
+        ensure(deadline)
+        returns (uint256[] memory amounts)
+    {
         require(path[path.length - 1] == WETH, "SoulSwapRouter: INVALID_PATH");
         amounts = SoulSwapLibrary.getAmountsIn(factory, amountOut, path);
-        require(amounts[0] <= amountInMax, "SoulSwapRouter: EXCESSIVE_INPUT_AMOUNT");
+
+        require(
+            amounts[0] <= amountInMax,
+            "SoulSwapRouter: EXCESSIVE_INPUT_AMOUNT"
+        );
+
         TransferHelper.safeTransferFrom(
             path[0],
             msg.sender,
             SoulSwapLibrary.pairFor(factory, path[0], path[1]),
             amounts[0]
         );
+
         _swap(amounts, path, address(this));
+
         IWETH(WETH).withdraw(amounts[amounts.length - 1]);
+
         TransferHelper.safeTransferETH(to, amounts[amounts.length - 1]);
     }
 
@@ -999,10 +1225,19 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external virtual override ensure(deadline) returns (uint256[] memory amounts) {
+    )
+        external
+        virtual
+        override
+        ensure(deadline)
+        returns (uint256[] memory amounts)
+    {
         require(path[path.length - 1] == WETH, "SoulSwapRouter: INVALID_PATH");
         amounts = SoulSwapLibrary.getAmountsOut(factory, amountIn, path);
-        require(amounts[amounts.length - 1] >= amountOutMin, "SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT");
+        require(
+            amounts[amounts.length - 1] >= amountOutMin,
+            "SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT"
+        );
         TransferHelper.safeTransferFrom(
             path[0],
             msg.sender,
@@ -1019,12 +1254,27 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         address[] calldata path,
         address to,
         uint256 deadline
-    ) external payable virtual override ensure(deadline) returns (uint256[] memory amounts) {
+    )
+        external
+        payable
+        virtual
+        override
+        ensure(deadline)
+        returns (uint256[] memory amounts)
+    {
         require(path[0] == WETH, "SoulSwapRouter: INVALID_PATH");
         amounts = SoulSwapLibrary.getAmountsIn(factory, amountOut, path);
-        require(amounts[0] <= msg.value, "SoulSwapRouter: EXCESSIVE_INPUT_AMOUNT");
+        require(
+            amounts[0] <= msg.value,
+            "SoulSwapRouter: EXCESSIVE_INPUT_AMOUNT"
+        );
         IWETH(WETH).deposit{value: amounts[0]}();
-        assert(IWETH(WETH).transfer(SoulSwapLibrary.pairFor(factory, path[0], path[1]), amounts[0]));
+        assert(
+            IWETH(WETH).transfer(
+                SoulSwapLibrary.pairFor(factory, path[0], path[1]),
+                amounts[0]
+            )
+        );
         _swap(amounts, path, to);
         // refund dust eth, if any
         if (msg.value > amounts[0])
@@ -1040,16 +1290,17 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         for (uint256 i; i < path.length - 1; i++) {
             (address input, address output) = (path[i], path[i + 1]);
             (address token0, ) = SoulSwapLibrary.sortTokens(input, output);
-            ISoulSwapPair pair = ISoulSwapPair(SoulSwapLibrary.pairFor(factory, input, output));
+            ISoulSwapPair pair = ISoulSwapPair(
+                SoulSwapLibrary.pairFor(factory, input, output)
+            );
             uint256 amountInput;
             uint256 amountOutput;
             {
                 // scope to avoid stack too deep errors
                 (uint256 reserve0, uint256 reserve1, ) = pair.getReserves();
-                (uint256 reserveInput, uint256 reserveOutput) =
-                    input == token0
-                        ? (reserve0, reserve1)
-                        : (reserve1, reserve0);
+                (uint256 reserveInput, uint256 reserveOutput) = input == token0
+                    ? (reserve0, reserve1)
+                    : (reserve1, reserve0);
                 amountInput = IERC20(input).balanceOf(address(pair)).sub(
                     reserveInput
                 );
@@ -1059,14 +1310,12 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
                     reserveOutput
                 );
             }
-            (uint256 amount0Out, uint256 amount1Out) =
-                input == token0
-                    ? (uint256(0), amountOutput)
-                    : (amountOutput, uint256(0));
-            address to =
-                i < path.length - 2
-                    ? SoulSwapLibrary.pairFor(factory, output, path[i + 2])
-                    : _to;
+            (uint256 amount0Out, uint256 amount1Out) = input == token0
+                ? (uint256(0), amountOutput)
+                : (amountOutput, uint256(0));
+            address to = i < path.length - 2
+                ? SoulSwapLibrary.pairFor(factory, output, path[i + 2])
+                : _to;
             pair.swap(amount0Out, amount1Out, to, new bytes(0));
         }
     }
@@ -1087,7 +1336,8 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         uint256 balanceBefore = IERC20(path[path.length - 1]).balanceOf(to);
         _swapSupportingFeeOnTransferTokens(path, to);
         require(
-            IERC20(path[path.length - 1]).balanceOf(to).sub(balanceBefore) >= amountOutMin,
+            IERC20(path[path.length - 1]).balanceOf(to).sub(balanceBefore) >=
+                amountOutMin,
             "SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT"
         );
     }
@@ -1101,13 +1351,21 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         require(path[0] == WETH, "SoulSwapRouter: INVALID_PATH");
         uint256 amountIn = msg.value;
         IWETH(WETH).deposit{value: amountIn}();
-        
-        assert(IWETH(WETH).transfer(SoulSwapLibrary.pairFor(factory, path[0], path[1]), amountIn));
+
+        assert(
+            IWETH(WETH).transfer(
+                SoulSwapLibrary.pairFor(factory, path[0], path[1]),
+                amountIn
+            )
+        );
         uint256 balanceBefore = IERC20(path[path.length - 1]).balanceOf(to);
         _swapSupportingFeeOnTransferTokens(path, to);
-        
-        require(IERC20(path[path.length - 1]).balanceOf(to).sub(balanceBefore) >= amountOutMin,
-            "SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT");
+
+        require(
+            IERC20(path[path.length - 1]).balanceOf(to).sub(balanceBefore) >=
+                amountOutMin,
+            "SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT"
+        );
     }
 
     function swapExactTokensForETHSupportingFeeOnTransferTokens(
@@ -1126,7 +1384,10 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         );
         _swapSupportingFeeOnTransferTokens(path, address(this));
         uint256 amountOut = IERC20(WETH).balanceOf(address(this));
-        require(amountOut >= amountOutMin, "SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT");
+        require(
+            amountOut >= amountOutMin,
+            "SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT"
+        );
         IWETH(WETH).withdraw(amountOut);
         TransferHelper.safeTransferETH(to, amountOut);
     }
@@ -1156,13 +1417,23 @@ contract SoulSwapRouter is ISoulSwapRouter02 {
         return SoulSwapLibrary.getAmountIn(amountOut, reserveIn, reserveOut);
     }
 
-    function getAmountsOut(uint256 amountIn, address[] memory path) public view virtual override 
-        returns (uint256[] memory amounts) {
+    function getAmountsOut(uint256 amountIn, address[] memory path)
+        public
+        view
+        virtual
+        override
+        returns (uint256[] memory amounts)
+    {
         return SoulSwapLibrary.getAmountsOut(factory, amountIn, path);
     }
 
     function getAmountsIn(uint256 amountOut, address[] memory path)
-        public view virtual override returns (uint256[] memory amounts) {
+        public
+        view
+        virtual
+        override
+        returns (uint256[] memory amounts)
+    {
         return SoulSwapLibrary.getAmountsIn(factory, amountOut, path);
     }
 }
